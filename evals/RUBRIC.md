@@ -29,7 +29,7 @@ Signs:
 - The explanation is correct and costly to use.
 - The skill rejected HTML because nothing needs input, because there is no control, or because Markdown can hold the same content.
 
-Case: `15-html-complex-system`.
+Case: `15-html-complex-system`. `evals/pairwise.py` assigns this label when the skill chose text and the blind judge preferred the HTML answer in both orders.
 
 ### `medium_over_escalation`
 
@@ -45,7 +45,7 @@ Signs:
 - The skill escalated because the prompt was long.
 - The skill ignored a length or format that the user named.
 
-Cases: `01-simple-everyday`, `10-html-overkill`, `11-domain-expert`, `12-caveat-preserved`, `16-long-prompt-linear`.
+Cases: `01-simple-everyday`, `10-html-overkill`, `11-domain-expert`, `12-caveat-preserved`, `16-long-prompt-linear`. `evals/pairwise.py` assigns this label when the skill chose HTML and the blind judge preferred the text answer in both orders.
 
 ## Writing
 

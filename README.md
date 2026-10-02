@@ -101,7 +101,8 @@ Before it sends anything, the skill edits once against a short list of rules: pl
 ```text
 .claude-plugin/        plugin and marketplace manifests
 skills/explain/        SKILL.md, four reference files, one reference image
-evals/                 16 eval cases for `claude plugin eval`, and RUBRIC.md
+evals/                 16 eval cases for `claude plugin eval`, RUBRIC.md, pairwise.py
+evals-heldout/         8 cases that are never read while the skill is edited
 ```
 
 `SKILL.md` is short. The reference files for diagrams, HTML explainers, the ladder, and the writing style load only when a request needs them.
@@ -113,6 +114,14 @@ claude plugin eval . --scaffold --allow-tools Write
 ```
 
 `--scaffold` lets one case create a small fixture repository, and `--allow-tools Write` lets the HTML cases write a file. The cases check invariants such as factual fidelity, medium choice, kept caveats, and stated uncertainty. They do not check wording. `evals/RUBRIC.md` lists the failure categories, including `medium_under_escalation` and `medium_over_escalation`.
+
+Medium choice has two extra checks. `evals-heldout/` holds cases that were not used to tune the skill, so a change that helps `evals/` and not these has overfit. `evals/pairwise.py` generates a text answer and an HTML answer for each held-out case, then asks a second model to pick the more useful one without knowing which medium the skill chose:
+
+```bash
+python3 evals/pairwise.py
+```
+
+The judge reads the page source and one screenshot. It cannot operate the page, so treat its verdicts as evidence to check against your own reading, not as ground truth.
 
 ## Later
 

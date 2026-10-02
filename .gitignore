@@ -11,3 +11,5 @@ evals/**/results/
 .eval-results/
 *.tmp
 .ignore
+pairwise-tmp/
+evals-heldout/results/
