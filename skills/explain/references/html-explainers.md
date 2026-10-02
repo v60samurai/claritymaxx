@@ -1,6 +1,6 @@
 # HTML explainers
 
-An HTML explainer is an interface to a mental model. The reader uses it to explore the model. A report with styling is still a report, and a report belongs on the text rung.
+An HTML explainer is an interface to a mental model. It earns its place through structure: spatial layout, linked views, and detail on demand. Controls are optional, and a page can be mostly static. A report with styling is still a report, and a report belongs on the text rung.
 
 ## Start from the model
 
@@ -16,8 +16,11 @@ List the parts and relationships that carry the model. Each one gets a place on 
 | See how an output depends on an input | A control that changes the input and redraws the result |
 | Place events in time | Timeline |
 | Find where a part sits in a system | Clickable architecture map |
+| See a normal flow and a failure flow in one system | Two views on the same map, with the path that differs highlighted |
+| See where a failure started and how it spread | The path through the components, with the step that lost or changed information marked |
+| Compare competing views of one thing | A table with the same rows for each view, and what each view gets right |
 
-Every interaction must teach something. If you remove a control and the reader loses nothing, remove it. The page must be less complex than its subject.
+Choose the smallest set of views that carries the model. Every view, element, and control must teach something. If you remove one and the reader loses nothing, remove it. The page must be less complex than its subject.
 
 ## Build
 
@@ -32,6 +35,7 @@ Every interaction must teach something. If you remove a control and the reader l
 - Build from the real code, logs, data, and documents when they exist. Use real names, real values, and real paths.
 - Label every invented value where the reader sees it, for example "Illustrative example". An invented request that looks like a log line will be read as an observation.
 - Show certainty the same way the prose does: mark inferred relationships and unknowns in the page itself.
+- Where a design you recommend sits next to a fact from the source, mark each one with a small visible label, for example "From the source", "Inferred", and "Recommended". Use the same labels across the whole page and explain them once.
 
 ## Deliver
 
@@ -39,4 +43,4 @@ Save the file in the current working directory under a descriptive name, unless 
 
 ## Check
 
-Open the file, or read it top to bottom if you cannot render it. Every control works. Every claim on the page appears in the model you built. Nothing on the page is there only because HTML made it possible.
+Open the file, or read it top to bottom if you cannot render it. Every control works. Each view answers a question the reader has. Every claim on the page appears in the model you built. Nothing on the page is there only because HTML made it possible.

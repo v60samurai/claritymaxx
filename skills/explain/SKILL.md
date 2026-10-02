@@ -1,6 +1,6 @@
 ---
 name: explain
-description: Use when the user wants to understand something rather than change it - "explain this", "what is X", "how does this work", "why does this happen", "what is going on here", "what caused this", "walk me through", "break this down", "teach me", "help me make sense of this", "what am I missing" - about a concept, code, a system, an architecture, a paper, data, logs, or a process. Builds a correct mental model first, then explains it in the cheapest medium that works (prose, a diagram, an interactive HTML page, or a video).
+description: Use when the user wants to understand something rather than change it - "explain this", "what is X", "how does this work", "why does this happen", "what is going on here", "what caused this", "walk me through", "break this down", "teach me", "help me make sense of this", "what am I missing" - about a concept, code, a system, an architecture, a paper, data, logs, or a process. Builds a correct mental model first, then explains it in the cheapest medium that works (prose, a diagram, an HTML explainer, or a video).
 ---
 
 # Explain
@@ -23,7 +23,7 @@ This step is complete when you can do all three:
 
 - State the model in a few sentences.
 - Name the **load-bearing** parts: the few concepts and relationships that carry most of the difficulty. Other facts you found stay out unless they change the model.
-- Sort every load-bearing claim as **observed** (the source shows it), **inferred** (you reasoned to it), or **unknown** (the source does not settle it).
+- Sort every load-bearing claim as **observed** (the source shows it), **inferred** (you reasoned to it), **recommended** (a design you propose), or **unknown** (the source does not settle it).
 
 ## 3. Read the reader
 
@@ -34,16 +34,16 @@ Infer what the user already knows from their vocabulary, what they say they unde
 
 ## 4. Choose the medium
 
-Use the **cheapest medium** that carries the model. Stop at the first rung that works.
+Use the **cheapest medium** that explains the model well: the lowest rung where the reader can form, inspect, and navigate it without rebuilding the structure in their head. Decide from the model you built in step 2, and ignore the length of the prompt.
 
 | Rung | Use it when | Before you build |
 |------|-------------|------------------|
-| Text | The model is a short chain of ideas. | |
-| Diagram | The hard part is how things relate: flow, sequence, dependency, hierarchy, state, or cause. | Read `references/visual-explanations.md` |
-| HTML | The reader must explore: several connected concepts, levels of abstraction, a path to step through, or an input to change. | Read `references/html-explainers.md` |
-| Video | The model is a change over time that a still frame hides, or the user asks for video. | Read the Video section of `references/karpathy-output-ladder.md` |
+| Text | One linear path is enough, and the reader can hold it in working memory. | |
+| Diagram | One or two relationships are the main difficulty: flow, sequence, dependency, hierarchy, state, or cause. | Read `references/visual-explanations.md` |
+| HTML | The subject has enough interacting structure that layout, linked views, or detail on demand reduces the reader's effort. The page can be mostly static. | Read `references/html-explainers.md` |
+| Video | Motion carries the model, or the user asks for video. | Read the Video section of `references/karpathy-output-ladder.md` |
 
-A medium that the user names wins. When two rungs both seem right, read `references/karpathy-output-ladder.md` for the test at each rung.
+A medium, length, or format that the user names wins. Read `references/karpathy-output-ladder.md` before you settle the rung when the model has more than five interacting parts, a normal flow and a failure flow, trust boundaries, or wants two or more diagrams, and when two rungs both seem right. It holds the cues for the HTML rung and examples for each rung.
 
 ## 5. Write
 
@@ -53,6 +53,7 @@ Match the length to the question. "Why does ice float?" gets a few sentences. A 
 - Put one idea in each sentence. Name the actor. State cause and effect with "because", "so", and "if".
 - Use the correct technical term, define it at first use, and keep that same term to the end.
 - Say "inferred" or "unknown" in the sentence that carries such a claim, and say what would settle it.
+- Write a recommended design as a recommendation, with the condition it depends on: "If jobs must resume by replaying events, the event log should be authoritative." Keep the plain statement when the source supports it.
 - Mark each invented example as illustrative.
 
 For more than a few paragraphs of prose, or when the user asks for ASD-STE100 or stricter controlled language, read `references/ste-style.md`.
@@ -86,8 +87,10 @@ Compare the explanation with the model from step 2. Each load-bearing condition,
 - **A beginner answer for an expert.** The user showed domain knowledge and the draft teaches the basics. Switch to Inspect.
 - **An invented example that looks real.** A made-up request, log line, or number sits next to real ones without a label. Label it.
 - **Prose where a diagram fits.** Three paragraphs describe who calls whom. Draw it.
-- **An artifact where prose fits.** Two paragraphs would answer the question. Write them.
-- **A richer medium because it is available.** Each rung up needs a reason that comes from the model.
+- **Over-escalation.** A page or a video for a question that a short answer or one diagram explains as well. Write the short answer.
+- **Under-escalation.** A long answer with several separate diagrams for a system with many interacting parts. The reader has to rebuild the structure. Build the page.
+- **"Nothing needs input."** The absence of controls does not decide the HTML rung. Structure does.
+- **A recommendation that reads as a fact.** "The event log is the source of truth" describes a design you propose as if the source showed it. State the condition and say "should".
 - **A handsome artifact that teaches nothing.** Every element and every interaction answers a question the reader has. Remove the rest.
 - **A compliance claim.** The prose is inspired by ASD-STE100. Call it compliant only after a check against the standard that the user asked for.
 - **"80% STE" as a score.** The phrase names a style direction and measures nothing.

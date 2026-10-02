@@ -18,7 +18,7 @@ He described a progression of output formats for that work:
 
 - **Clear writing.** Ask for prose in the style of ASD-STE100, a controlled language from aerospace maintenance. The full standard is strict, so he suggests a softer target, "80% of the way to ASD-STE100".
 - **Diagrams and images**, when structure is easier to see than to read.
-- **Interactive HTML pages**, when exploring helps.
+- **HTML pages** built for the one question, which can be interactive.
 - **Bespoke explainer videos**, the format he is most optimistic about.
 
 The larger idea is that intelligence and code are getting cheap. A custom, disposable artifact made to answer one question was too expensive to build before. Now it is a reasonable thing to ask for.
@@ -74,19 +74,19 @@ Or call it by name: `/claritymaxx:explain <what you want to understand>`.
 ## The ladder
 
 ```text
-text  →  diagram  →  interactive HTML  →  video (optional)
+text  →  diagram  →  bespoke HTML explainer  →  video (optional)
 ```
 
-This ladder is Karpathy's progression of output formats (see [Inspiration](#inspiration)). He presents each format as better than the one before for hard material. Claritymaxx adds one rule of its own: it climbs only as far as the mental model needs. The conditions in the table below are ours.
+This ladder is Karpathy's progression of output formats (see [Inspiration](#inspiration)). He presents each format as better than the one before for hard material. Claritymaxx adds one rule of its own: it picks the rung where the topic is easiest to understand, and goes no higher. The conditions in the table below are ours.
 
 | Medium | Chosen when |
 |--------|-------------|
-| Text | The model is a short chain of ideas. |
-| Diagram | The hard part is how things relate: flow, sequence, dependency, state, cause. |
-| Interactive HTML | You need to explore: several connected concepts, levels of abstraction, a path to step through, an input to change. |
+| Text | One linear path is enough, and you can hold it in your head. |
+| Diagram | One or two relationships are the hard part: flow, sequence, dependency, state, cause. |
+| HTML explainer | The subject has many interacting parts, and layout, linked views, or detail on demand make it easier to hold: an architecture map, a normal flow next to a failure flow, an incident traced through components. The page does not need controls. |
 | Video | The model is a change over time that a still frame hides, or you ask for one. No paid service is required. |
 
-"Why does ice float?" gets a few sentences. A request to play with consistent hashing gets a small page with a ring you can add nodes to. If you name a medium, you get that medium.
+"Why does ice float?" gets a few sentences. An OAuth login flow gets a diagram and a few sentences. A production system with many services, trust boundaries, and an incident to diagnose will often get a small page with a map and the failure path. Not every complex topic gets a page, and a long prompt about one idea still gets text. If you name a medium or a length, you get that.
 
 ## Writing style
 
@@ -101,7 +101,7 @@ Before it sends anything, the skill edits once against a short list of rules: pl
 ```text
 .claude-plugin/        plugin and marketplace manifests
 skills/explain/        SKILL.md, four reference files, one reference image
-evals/                 14 eval cases for `claude plugin eval`
+evals/                 16 eval cases for `claude plugin eval`, and RUBRIC.md
 ```
 
 `SKILL.md` is short. The reference files for diagrams, HTML explainers, the ladder, and the writing style load only when a request needs them.
@@ -112,7 +112,7 @@ Run the evals from a clone:
 claude plugin eval . --scaffold --allow-tools Write
 ```
 
-`--scaffold` lets one case create a small fixture repository, and `--allow-tools Write` lets one case write an HTML file. The cases check invariants such as factual fidelity, medium choice, kept caveats, and stated uncertainty. They do not check wording.
+`--scaffold` lets one case create a small fixture repository, and `--allow-tools Write` lets the HTML cases write a file. The cases check invariants such as factual fidelity, medium choice, kept caveats, and stated uncertainty. They do not check wording. `evals/RUBRIC.md` lists the failure categories, including `medium_under_escalation` and `medium_over_escalation`.
 
 ## Later
 
