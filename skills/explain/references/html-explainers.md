@@ -10,6 +10,9 @@ List the parts and relationships that carry the model. Each one gets a place on 
 |---------------------|-----------|
 | See the whole before the parts | Overview first, detail on demand |
 | Follow one request, record, or event | Step-through with next and back, one path highlighted |
+| See how one input changes form across stages | A row of stages with one example carried through. Each stage shows the form of the example at that stage and what changed. |
+| Know where a claim came from | A provenance trail: the claim, its source, its time, and each step that changed it |
+| See what each boundary permits | The map with the trust zones drawn, and what crosses each line |
 | Know what a term means without leaving the page | Definition on hover or tap |
 | Move between "what it does" and "how it does it" | Toggle for the level of abstraction |
 | Compare two designs or two moments | Before and after, side by side, same layout |
@@ -20,7 +23,7 @@ List the parts and relationships that carry the model. Each one gets a place on 
 | See where a failure started and how it spread | The path through the components, with the step that lost or changed information marked |
 | Compare competing views of one thing | A table with the same rows for each view, and what each view gets right |
 
-Choose the smallest set of views that carries the model. Every view, element, and control must teach something. If you remove one and the reader loses nothing, remove it. The page must be less complex than its subject.
+Choose the smallest set of views that carries the model. Every view, element, and control must teach something. If you remove one and the reader loses nothing, remove it. The page must be less complex than its subject. Cards, metrics, panels, and animation that answer no question from the reader are decoration, so remove them.
 
 ## Build
 
@@ -28,7 +31,7 @@ Choose the smallest set of views that carries the model. Every view, element, an
 - Put the model in the first screen: one sentence and the overview diagram. A reader who stops there still leaves with the right idea.
 - All text on the page follows the writing rules and the edit pass in step 5 of `SKILL.md`. That includes headings, labels, button text, and captions.
 - Use motion only to show a change of state or the movement of information.
-- Make it readable at phone width and in light and dark themes. Make every control reachable from the keyboard.
+- Make it readable at phone width and in light and dark themes. The page itself must never scroll sideways: let rows of links, buttons, and cards wrap, and put a wide diagram or table in its own container that scrolls. Make every control reachable from the keyboard.
 
 ## Ground it
 

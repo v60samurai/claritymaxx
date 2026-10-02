@@ -17,35 +17,72 @@ His closing advice is to push the boundaries, because the results are surprising
 
 ## How Claritymaxx uses the ladder
 
-Karpathy orders the formats by richness. Claritymaxx adds one rule: pick the rung where the mental model is easiest to form, inspect, navigate, and remember. The **cheapest medium** is the lowest rung that does that well. Cost has two sides. One side is the time to build the artifact and the number of things in it that can be wrong. The other side is the reader's effort to hold the model in their head. A long answer that makes the reader rebuild the structure is expensive, even though it was cheap to write.
+Karpathy orders the formats by richness. Claritymaxx adds one rule: pick the rung where the mental model is easiest to form, inspect, navigate, and remember, and go no higher. The ladder is an order of escalation for understanding. It is not an order of polish.
 
-Markdown is one rung. It is not the baseline that a richer medium must beat by offering controls.
+Cost has two sides. One side is the time to build the artifact and the number of things in it that can be wrong. The other side is the reader's effort to hold the model in their head. A long answer that makes the reader rebuild the structure is expensive, even though it was cheap to write.
+
+Text is one rung with its own test. It is not the baseline that a richer medium must beat.
 
 | Rung | It passes when |
 |------|----------------|
-| Text | One linear path is enough. A reader can hold the model in working memory after one read. |
-| Diagram | One or two relationships are the main difficulty: sequence, hierarchy, dependency, cause, state, or architecture. Prose would make the reader build the picture in their head. |
-| HTML | The subject has enough interacting structure that spatial layout, several linked views, or progressive disclosure reduces the reader's effort. The page can be mostly static. |
+| Text | The difficulty is a definition or one line of reasoning. A reader can hold the model in working memory after one read. |
+| Diagram | One relationship is the main difficulty: sequence, hierarchy, dependency, cause, state, or flow. Prose would make the reader build the picture in their head. |
+| HTML | The reader must see several connected pictures of one model, so spatial layout, linked views, or progressive disclosure reduces the reader's effort. The page can be mostly static. |
 | Video | Motion itself carries the model, narration helps materially, a transformation over time is hard to show in still frames, or the user asked for a video. |
 
 Start at text and stop at the first rung that passes. A subject that passes the HTML test does not also need a video.
 
-### Cues for the HTML rung
+### The shape of the difficulty
 
-These are cues for judgement. Do not count them into a score. Consider HTML strongly when several are true:
+Two things decide the rung: how much there is, and what **shape** it has. Shape matters more. Name the shape of the model from step 2 of `SKILL.md`, then read the rung from this table.
+
+| The difficulty is | The reader needs to | Usual rung |
+|-------------------|---------------------|------------|
+| A definition, a property, or one reason | Read it once | Text |
+| One relationship: order, dependency, containment, cause, or state | See one picture | Text with one diagram |
+| A transformation in stages: one input changes form several times before it becomes the output | Follow one example through every stage and see its form at each stage | HTML step-through. One diagram when the stages are few and the form changes little. |
+| Several levels of abstraction | Move between the overview and the detail | HTML |
+| Change over time: state, a feedback loop, or a procedure that repeats | See the state before and after each step | HTML step-through. Video only when still frames hide the motion. |
+| Geometry or position | See where things are and how far apart | Diagram. HTML when the reader must vary an input to see the effect. |
+| A system of interacting parts | See the map, then follow one request across it | HTML |
+| Two paths over the same parts, such as a normal flow and a failure flow | Compare the paths on one layout | HTML |
+| Competing views of one thing | Compare the views row by row | Table. HTML when each view needs its own picture. |
+
+A model can have two shapes. Take the higher rung and use the lower rung inside it.
+
+### Cues when the reader is learning
+
+A reader in Learn mode has no picture to hang the words on, so prose that describes a mechanism makes this reader build the picture and understand it at the same time. When the user wants to know how something works, as opposed to what it is, find what the user cannot yet picture. Consider HTML strongly when several of these are true:
+
+- The explanation follows one object as it changes representation.
+- Each stage uses the output of the stage before, and there are more than about four stages.
+- The mechanism has more than one level, and the reader must connect the levels.
+- State changes over time, or a loop feeds a result back in.
+- A cause in one stage has its effect several stages later.
+- Position, distance, or geometry carries part of the idea.
+
+A concept with one central relationship stays lower. An idea that turns on one triangle of cause, one comparison, or one sequence of a few messages gets text with one diagram.
+
+### Cues when the subject is a system
+
+Make one check first. Draw, in your head, one diagram of every path that the user asked about. If it has about nine nodes or fewer and every arrow fits, the rung is Diagram, and the cues below do not apply. Count only what the user asked about. A failure case or an open question that you noticed yourself gets a sentence under the diagram, and it is not a reason for a page.
+
+When one diagram cannot hold it, consider HTML strongly when several of these are true:
 
 - More than five important components interact, or more than one system layer matters.
 - A normal flow and a failure flow both need explanation.
 - Several levels of abstraction matter, and the reader must move between overview and detail.
 - State transitions, chronology, or provenance carry part of the model.
-- Trust boundaries or security boundaries matter.
-- People hold competing mental models of the subject, and the answer must compare them.
+- Trust boundaries or permission boundaries matter.
+- More than one path reaches the same data or the same action.
+- People hold competing mental models of the subject, or make competing claims about it, and the answer must compare them.
 - The answer wants two or more diagrams, or two views of one system.
 - The prose answer would be long, or the reader would have to connect sections that sit far apart.
-- The explanation follows one item through the system, or shows a failure as it spreads through components.
+- The explanation follows one request through the system, or shows one incident as it spreads through components.
+- The subject is easier to hold as a map than as a list of sections.
 - The reader is likely to come back to the explanation.
 
-The cues describe the model you built in step 2 of `SKILL.md`. They do not describe the prompt. A long prompt about one linear idea stays on the text rung.
+All of these cues are for judgement. Do not count them into a score. They describe the model you built in step 2 of `SKILL.md`. They do not describe the prompt. A long prompt about one linear idea stays on the text rung.
 
 ### Reasons that do not decide the rung
 
@@ -54,6 +91,8 @@ Each of these is true of many subjects that still belong on the HTML rung:
 - Nothing needs user input.
 - There is no control to operate.
 - Markdown can technically hold the same information.
+- The steps can be written as a numbered list.
+- The prompt is short, or the subject has one name.
 - The page would look better than the text.
 
 Decide with one question: would a small page built for this subject make the model easier to form, inspect, navigate, or remember? If yes, build it.
@@ -63,13 +102,16 @@ Decide with one question: would a small page built for this subject make the mod
 | Subject | Usual rung |
 |---------|------------|
 | "Why does ice float?", "What is a hash map?", "What does idempotent mean?", embeddings in five minutes | Text |
-| An OAuth login flow, a simple RAG pipeline, a request that moves through three services | Text with one diagram |
+| An OAuth login flow, a simple RAG pipeline, a request that moves through three services, what a confounder does to a correlation | Text with one diagram |
+| A mechanism that a learner must watch work, in which one input changes form across many stages: a compiler from source text to machine code, a diffusion model from noise to image | HTML, strongly considered |
 | A production architecture with many agents or services, a large codebase with several subsystems, an incident that spans services, a system with a normal flow, a failure flow, trust boundaries, state, and recovery, a paper that compares several mechanisms across stages, a business system with many dependent rules | HTML, strongly considered |
 
 Two errors are equally bad:
 
-- **Under-escalation.** Text or a small diagram for a model that a page would make much easier to use. The answer is correct and costly to use: very long, with several unconnected diagrams, and the reader has to rebuild the relationships.
-- **Over-escalation.** A page or a video where a short answer or one diagram explains the subject as well. The artifact took more effort than the question deserved.
+- **Under-escalation.** The representation can express the answer, and it costs the reader much more effort than a richer one would. Examples: long prose for a mechanism with many stages, several unconnected diagrams in place of one page, prose that makes the reader work out each change of state, a normal flow and a failure flow that the reader must compare by hand. A correct answer can still fail here.
+- **Over-escalation.** A rich artifact where a simpler medium gives the same model with comparable clarity. Examples: a page for a definition, a page for two paragraphs of content, a control or an animation that explains nothing, several views where one diagram is enough.
+
+The examples in this file illustrate shapes. Decide from the shape of the model in front of you, not from a match with an example.
 
 Rungs combine. An HTML page contains prose and diagrams. Pick the highest rung that is needed, then use the lower rungs inside it.
 

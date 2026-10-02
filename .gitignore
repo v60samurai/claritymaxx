@@ -14,3 +14,4 @@ evals/**/results/
 pairwise-tmp/
 evals-heldout/results/
 dist/
+evals-surface/results/

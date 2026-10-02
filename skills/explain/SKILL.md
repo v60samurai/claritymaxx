@@ -1,6 +1,6 @@
 ---
 name: explain
-description: Use when the user wants to understand something rather than change it - "explain this", "what is X", "how does this work", "why does this happen", "what is going on here", "what caused this", "walk me through", "break this down", "teach me", "help me understand", "help me make sense of this", "what am I missing", "why is it designed this way" - about a concept, code, a system, an architecture, a paper, data, logs, or a process. Builds a correct mental model first, then explains it in the cheapest medium that works (prose, a diagram, an HTML explainer, or a video).
+description: Use when the user wants to understand something rather than change it - "explain this", "what is X", "how does this work", "why does this happen", "what is going on here", "what caused this", "walk me through", "break this down", "teach me", "help me understand", "help me make sense of this", "what am I missing", "why is it designed this way" - about a concept, code, a system, an architecture, a paper, data, logs, or a process. Builds a correct mental model first, then explains it in the representation that makes the model easiest to understand (prose, a diagram, an HTML explainer, or a video).
 ---
 
 # Explain
@@ -29,27 +29,37 @@ This step is complete when you can do all three:
 
 Infer what the user already knows from their vocabulary, what they say they understand, and how specific the question is. Weigh that evidence above the difficulty of the topic.
 
-- **Learn**: the user has no working model yet. Build from first principles, one new concept at a time, each resting on the one before. Add a concrete example where the idea turns abstract.
+- **Learn**: the user has no working model yet. Build from first principles, one new concept at a time, each resting on the one before. Add a concrete example where the idea turns abstract. For a mechanism, carry one concrete example through every stage, so the reader sees what changes at each stage.
 - **Inspect**: the user knows the domain. Start at the part they asked about. Cover relationships, why each part exists, unusual decisions, contradictions, failure modes, trade-offs, and what is observed versus inferred.
 
-## 4. Choose the medium
+## 4. Choose the representation
 
-Use the **cheapest medium** that explains the model well: the lowest rung where the reader can form, inspect, and navigate it without rebuilding the structure in their head. Decide from the model you built in step 2, and ignore the length of the prompt.
+Choose the representation that makes the model easiest to form, inspect, and remember. Decide from the **shape** of the model you built in step 2. The size of the topic and the length of the prompt do not decide it. A short question about a mechanism can need a page, and a long prompt about one line of reasoning needs text.
 
-| Rung | Use it when | Before you build |
-|------|-------------|------------------|
-| Text | One linear path is enough, and the reader can hold it in working memory. | |
-| Diagram | One or two relationships are the main difficulty: flow, sequence, dependency, hierarchy, state, or cause. | Read `references/visual-explanations.md` |
-| HTML | The subject has enough interacting structure that layout, linked views, or detail on demand reduces the reader's effort. The page can be mostly static. | Read `references/html-explainers.md` |
+Answer these before you write:
+
+1. What makes this hard to understand: a definition, one relationship, or a mechanism in which several stages, layers, paths, or views depend on each other?
+2. What must the reader see or compare to understand it?
+3. What is the smallest artifact that shows that?
+
+Take the lowest rung whose test passes. Text is one rung with its own test. It is not a default that the other rungs must beat. An answer that would need more than about 800 words of text, or more than one diagram, has failed the text test and the diagram test, however well the text could be organised. Move up a rung.
+
+| Rung | Its test | Before you build |
+|------|----------|------------------|
+| Text | The difficulty is a definition or one line of reasoning. The reader holds the whole model after one read, and a picture would add little. | |
+| Diagram | One relationship carries the difficulty: flow, sequence, dependency, hierarchy, state, or cause. One picture of about nine nodes shows it, and that picture can carry two or three paths. | Read `references/visual-explanations.md` |
+| HTML | The reader must see several connected pictures of one model: one thing that changes form across many stages, a normal path and a failure path, an overview with detail under it, layers or boundaries, or views that compete. The page can be mostly static. | Read `references/html-explainers.md` |
 | Video | Motion carries the model, or the user asks for video. | Read the Video section of `references/karpathy-output-ladder.md` |
 
-A medium, length, or format that the user names wins. Read `references/karpathy-output-ladder.md` before you settle the rung when the model has more than five interacting parts, a normal flow and a failure flow, trust boundaries, or wants two or more diagrams, and when two rungs both seem right. It holds the cues for the HTML rung and examples for each rung.
+A medium, length, or format that the user names wins.
+
+Read `references/karpathy-output-ladder.md` before you settle the rung whenever the subject is a mechanism or a system, or the answer would be long. It maps each shape of difficulty to a rung, and it holds the cues for learners and for systems.
 
 Choose the medium from the model. Then build it with what this surface can do. A chat surface can lack a shell, local files, file creation, or a network connection. If the surface cannot produce the medium you chose, give the nearest form that keeps the same structure, and say in one sentence which medium you would have used. `references/html-explainers.md` and `references/visual-explanations.md` list the forms for each surface. Say that you created a file or a page only after the tool call that created it succeeded.
 
 ## 5. Write
 
-Match the length to the question. "Why does ice float?" gets a few sentences. A question about one concept gets a few short paragraphs with no headings, about 250 words at most, even when the user asks for it to be "really clear". Stop when the model is complete. A second example or a list of related facts makes the answer longer and the model no clearer.
+A length or a format that the user names is exact. "In five sentences" gets five sentences, so count them before you send. Otherwise, match the length to the question. "Why does ice float?" gets a few sentences. On the text rung, a question about one concept gets a few short paragraphs with no headings, about 250 words at most, even when the user asks for it to be "really clear". Stop when the model is complete. A second example or a list of related facts makes the answer longer and the model no clearer.
 
 - Lead with the model in one or two sentences, then build it up.
 - Put one idea in each sentence. Name the actor. State cause and effect with "because", "so", and "if".
@@ -90,7 +100,8 @@ Compare the explanation with the model from step 2. Each load-bearing condition,
 - **An invented example that looks real.** A made-up request, log line, or number sits next to real ones without a label. Label it.
 - **Prose where a diagram fits.** Three paragraphs describe who calls whom. Draw it.
 - **Over-escalation.** A page or a video for a question that a short answer or one diagram explains as well. Write the short answer.
-- **Under-escalation.** A long answer with several separate diagrams for a system with many interacting parts. The reader has to rebuild the structure. Build the page.
+- **Under-escalation.** A long answer, or several separate diagrams, for a mechanism or a system. The answer is correct, and the reader has to assemble the picture from the parts. Build the page.
+- **Size in place of shape.** The rung was chosen from the length of the prompt or from how large the topic sounds. Choose it from the shape of the model.
 - **"Nothing needs input."** The absence of controls does not decide the HTML rung. Structure does.
 - **A recommendation that reads as a fact.** "The event log is the source of truth" describes a design you propose as if the source showed it. State the condition and say "should".
 - **A file that does not exist.** The reply says a page or a file was created and no tool call created it. Create it, or give the structure in the reply and say so.

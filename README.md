@@ -102,7 +102,7 @@ Both the ladder of output formats and the ASD-STE100 writing style in this proje
 
 ## What `explain` does
 
-`explain` builds a mental model of the subject before it writes a word of explanation. It reads the source, finds the few parts and relationships that carry most of the difficulty, and separates what the source shows from what it inferred. Then it presents that model in the cheapest medium that works.
+`explain` builds a mental model of the subject before it writes a word of explanation. It reads the source, finds the few parts and relationships that carry most of the difficulty, and separates what the source shows from what it inferred. Then it chooses the representation that makes the model easiest to form: text, a diagram, or a small web page built for the question.
 
 ```text
 > why does this service read from both the cache and the database?
@@ -118,19 +118,21 @@ It adapts to the reader without a mode switch:
 ## The ladder
 
 ```text
-text  →  diagram  →  bespoke HTML explainer  →  video (optional)
+text  →  diagram  →  bespoke web explainer  →  video (optional)
 ```
 
-This ladder is Karpathy's progression of output formats (see [Inspiration](#inspiration)). He presents each format as better than the one before for hard material. Claritymaxx adds one rule of its own: it picks the rung where the topic is easiest to understand, and goes no higher. The conditions in the table below are ours.
+This ladder is Karpathy's progression of output formats (see [Inspiration](#inspiration)). He presents each format as better than the one before for hard material. Claritymaxx adds one rule of its own: it picks the rung where the topic is easiest to understand, and goes no higher. The goal is understanding, and a page is one way to get there. The conditions in the table below are ours.
+
+The choice is automatic, and it follows the shape of the idea more than its size. A short question about a mechanism can get a page, because a mechanism is easier to watch than to read. A long prompt about one line of reasoning gets text.
 
 | Medium | Chosen when |
 |--------|-------------|
-| Text | One linear path is enough, and you can hold it in your head. |
+| Text | The hard part is a definition or one line of reasoning, and you can hold it in your head. |
 | Diagram | One or two relationships are the hard part: flow, sequence, dependency, state, cause. |
-| HTML explainer | The subject has many interacting parts, and layout, linked views, or detail on demand make it easier to hold: an architecture map, a normal flow next to a failure flow, an incident traced through components. The page does not need controls. |
+| Web explainer | You need several connected pictures of one model: one thing that changes form across many stages, an architecture map, a normal flow next to a failure flow, an incident traced through components. The page does not need controls. |
 | Video | The model is a change over time that a still frame hides, or you ask for one. No paid service is required. |
 
-"Why does ice float?" gets a few sentences. An OAuth login flow gets a diagram and a few sentences. A production system with many services, trust boundaries, and an incident to diagnose will often get a small page with a map and the failure path. Not every complex topic gets a page, and a long prompt about one idea still gets text. If you name a medium or a length, you get that.
+"Why does ice float?" gets a few sentences. An OAuth login flow gets a diagram and a few sentences. A question about how a mechanism turns its input into its output, stage by stage, will often get a small page that follows one example through the stages. A production system with many services, trust boundaries, and an incident to diagnose will often get a small page with a map and the failure path. Not every complex topic gets a page. If you name a medium or a length, you get that.
 
 ## Writing style
 
@@ -145,7 +147,8 @@ Before it sends anything, the skill edits once against a short list of rules: pl
 ```text
 .claude-plugin/        plugin and marketplace manifests
 skills/explain/        SKILL.md, four reference files, one reference image
-evals/                 17 eval cases for `claude plugin eval`, RUBRIC.md, pairwise.py
+evals/                 22 eval cases for `claude plugin eval`, RUBRIC.md, pairwise.py
+evals-surface/         1 case that runs with no file tool
 evals-heldout/         8 cases that are never read while the skill is edited
 scripts/package.sh     builds the two release archives into dist/
 ```
@@ -157,12 +160,18 @@ To try the plugin from a clone without installing it, run `claude --plugin-dir .
 Run the evals from a clone:
 
 ```bash
-claude plugin eval . --scaffold --allow-tools Write
+claude plugin eval . --scaffold --allow-tools Write --judge-model sonnet
 ```
 
-`--scaffold` lets one case create a small fixture repository, and `--allow-tools Write` lets the HTML cases write a file. The cases check invariants such as factual fidelity, medium choice, kept caveats, and stated uncertainty. They do not check wording. `evals/RUBRIC.md` lists the failure categories, including `medium_under_escalation` and `medium_over_escalation`.
+`--scaffold` lets one case create a small fixture repository, and `--allow-tools Write` lets the HTML cases write a file. `--judge-model sonnet` helps: the default small judge fails correct answers on the longer rubrics. The judge is still noisy. In October 2026, `04-software-architecture` and `16-long-prompt-linear` failed their rubric graders on answers that a direct reading passes, so read the reply before you trust a failed verdict. The cases check invariants such as factual fidelity, medium choice, kept caveats, and stated uncertainty. They do not check wording. `evals/RUBRIC.md` lists the failure categories, including `medium_under_escalation` and `medium_over_escalation`.
 
-The cases run in Claude Code. Case `17-no-file-surface` gives the skill a complex system and no tool that can create a file, which stands in for a chat with file creation off. It checks that the reply keeps the structure and reports no file.
+The cases run in Claude Code. `evals-surface/` holds one case that gives the skill a complex system and no tool that can create a file, which stands in for a chat with file creation off. It checks that the reply keeps the structure and reports no file. Run it without the `Write` grant:
+
+```bash
+claude plugin eval . --eval-dir evals-surface --judge-model sonnet
+```
+
+The graders cannot read a page as a reader does. `evals/RUBRIC.md` has a review record for checking medium choice by hand.
 
 Medium choice has two extra checks. `evals-heldout/` holds cases that were not used to tune the skill, so a change that helps `evals/` and not these has overfit. `evals/pairwise.py` generates a text answer and an HTML answer for each held-out case, then asks a second model to pick the more useful one without knowing which medium the skill chose:
 
