@@ -1,0 +1,13 @@
+.DS_Store
+*.log
+.env
+.env.*
+node_modules/
+.claude/
+graft/
+thoughts/
+# eval and scratch output
+evals/**/results/
+.eval-results/
+*.tmp
+.ignore

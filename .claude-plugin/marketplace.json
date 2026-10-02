@@ -1,0 +1,12 @@
+{
+  "name": "claritymaxx",
+  "description": "Understand difficult things.",
+  "owner": { "name": "Harshit Badiger", "url": "https://github.com/v60samurai" },
+  "plugins": [
+    {
+      "name": "claritymaxx",
+      "source": "./",
+      "description": "Turn difficult topics into clear mental models."
+    }
+  ]
+}
