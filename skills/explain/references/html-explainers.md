@@ -24,7 +24,7 @@ Choose the smallest set of views that carries the model. Every view, element, an
 
 ## Build
 
-- One self-contained file: inline CSS and JavaScript, inline SVG for diagrams, no network requests, no build step. The file must open from disk.
+- One self-contained file: inline CSS, inline SVG for diagrams, and a small amount of inline JavaScript only where a control needs it. Use no external library, font, image, or stylesheet, no network request, no package install, and no build step or local server. The file must work when it is opened from disk with no connection.
 - Put the model in the first screen: one sentence and the overview diagram. A reader who stops there still leaves with the right idea.
 - All text on the page follows the writing rules and the edit pass in step 5 of `SKILL.md`. That includes headings, labels, button text, and captions.
 - Use motion only to show a change of state or the movement of information.
@@ -39,8 +39,17 @@ Choose the smallest set of views that carries the model. Every view, element, an
 
 ## Deliver
 
-Save the file in the current working directory under a descriptive name, unless the user names another place. Give the path. If the directory is a git repository, say that the file is new and untracked. Open it in the browser if a tool for that is available. In the reply, state the model in two or three sentences so the reader has the answer before they open the page.
+Deliver the page with what this surface can do. Use the first case that applies:
+
+- **The surface shows a page next to the conversation.** Create the page there.
+- **You have a working directory.** Save the file there under a descriptive name, unless the user names another place. Give the path. If the directory is a git repository, say that the file is new and untracked. Open it in the browser if a tool for that is available.
+- **You can create files and have no working directory.** Create the file and give it to the user as a download.
+- **You cannot create a file.** Put the same structure in the reply: the overview diagram first, then one short section for each view the page would have, with a table where the page would compare. Keep the certainty labels. Say in one sentence that a page would hold this structure better and that this surface could not create one.
+
+Say that a file or a page exists only after the tool call that created it succeeded. If that call failed, use the last case.
+
+In the reply, state the model in two or three sentences so the reader has the answer before they open the page.
 
 ## Check
 
-Open the file, or read it top to bottom if you cannot render it. Every control works. Each view answers a question the reader has. Every claim on the page appears in the model you built. Nothing on the page is there only because HTML made it possible.
+Open the page, or read it top to bottom if you cannot render it. Every control works. Each view answers a question the reader has. Every claim on the page appears in the model you built. Nothing on the page is there only because HTML made it possible.

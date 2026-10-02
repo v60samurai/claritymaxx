@@ -31,9 +31,13 @@ If the question has two jobs, draw the one that is harder to say in words and wr
 
 ## Render for the surface
 
-- Terminal: draw with box characters, inline, at most 80 columns wide.
-- A surface that renders Mermaid: use Mermaid.
-- Too large for either, or the layout is spatial: write an SVG file, or go up one rung to HTML.
+Use the first form that this surface can show:
+
+- A surface that renders Mermaid or SVG in the conversation: use it.
+- A terminal, or a surface that shows plain text only: draw with box characters inside a code block, at most 80 columns wide.
+- Too large for either, or the layout is spatial: write an SVG file if the surface can create files, or go up one rung to HTML.
+
+If you cannot tell what the surface renders, draw with box characters. They read correctly everywhere.
 
 ## Check
 

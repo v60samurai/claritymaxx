@@ -13,3 +13,4 @@ evals/**/results/
 .ignore
 pairwise-tmp/
 evals-heldout/results/
+dist/

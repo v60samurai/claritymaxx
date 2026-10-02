@@ -1,6 +1,6 @@
 ---
 name: explain
-description: Use when the user wants to understand something rather than change it - "explain this", "what is X", "how does this work", "why does this happen", "what is going on here", "what caused this", "walk me through", "break this down", "teach me", "help me make sense of this", "what am I missing" - about a concept, code, a system, an architecture, a paper, data, logs, or a process. Builds a correct mental model first, then explains it in the cheapest medium that works (prose, a diagram, an HTML explainer, or a video).
+description: Use when the user wants to understand something rather than change it - "explain this", "what is X", "how does this work", "why does this happen", "what is going on here", "what caused this", "walk me through", "break this down", "teach me", "help me understand", "help me make sense of this", "what am I missing", "why is it designed this way" - about a concept, code, a system, an architecture, a paper, data, logs, or a process. Builds a correct mental model first, then explains it in the cheapest medium that works (prose, a diagram, an HTML explainer, or a video).
 ---
 
 # Explain
@@ -17,7 +17,7 @@ Decide what the user wants to be able to do or predict afterwards. If two readin
 
 ## 2. Build the model
 
-Read the source before you form a view: the files, logs, paper, data, or documents that the question depends on. Follow each reference that the answer rests on. With no source material, your own knowledge is the source and the same bar applies.
+Read the source before you form a view: the files, logs, paper, data, or documents that the question depends on, including anything the user attached or pasted. Follow each reference that the answer rests on. With no source material, your own knowledge is the source and the same bar applies.
 
 This step is complete when you can do all three:
 
@@ -44,6 +44,8 @@ Use the **cheapest medium** that explains the model well: the lowest rung where 
 | Video | Motion carries the model, or the user asks for video. | Read the Video section of `references/karpathy-output-ladder.md` |
 
 A medium, length, or format that the user names wins. Read `references/karpathy-output-ladder.md` before you settle the rung when the model has more than five interacting parts, a normal flow and a failure flow, trust boundaries, or wants two or more diagrams, and when two rungs both seem right. It holds the cues for the HTML rung and examples for each rung.
+
+Choose the medium from the model. Then build it with what this surface can do. A chat surface can lack a shell, local files, file creation, or a network connection. If the surface cannot produce the medium you chose, give the nearest form that keeps the same structure, and say in one sentence which medium you would have used. `references/html-explainers.md` and `references/visual-explanations.md` list the forms for each surface. Say that you created a file or a page only after the tool call that created it succeeded.
 
 ## 5. Write
 
@@ -91,6 +93,7 @@ Compare the explanation with the model from step 2. Each load-bearing condition,
 - **Under-escalation.** A long answer with several separate diagrams for a system with many interacting parts. The reader has to rebuild the structure. Build the page.
 - **"Nothing needs input."** The absence of controls does not decide the HTML rung. Structure does.
 - **A recommendation that reads as a fact.** "The event log is the source of truth" describes a design you propose as if the source showed it. State the condition and say "should".
+- **A file that does not exist.** The reply says a page or a file was created and no tool call created it. Create it, or give the structure in the reply and say so.
 - **A handsome artifact that teaches nothing.** Every element and every interaction answers a question the reader has. Remove the rest.
 - **A compliance claim.** The prose is inspired by ASD-STE100. Call it compliant only after a check against the standard that the user asked for.
 - **"80% STE" as a score.** The phrase names a style direction and measures nothing.

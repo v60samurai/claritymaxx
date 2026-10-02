@@ -47,6 +47,17 @@ Signs:
 
 Cases: `01-simple-everyday`, `10-html-overkill`, `11-domain-expert`, `12-caveat-preserved`, `16-long-prompt-linear`. `evals/pairwise.py` assigns this label when the skill chose HTML and the blind judge preferred the text answer in both orders.
 
+## Surface
+
+The skill runs in chat on the web and in the desktop app, in Cowork, and in Claude Code. These surfaces differ in what they can create. A case with no `Write` in its `allowed_tools` stands in for a surface that cannot create a file.
+
+| Label | The run |
+|-------|---------|
+| `false_artifact_claim` | Says that a file or a page was created when no tool call created it. |
+| `structure_lost_on_fallback` | Could not create the page it chose, and gave a linear answer that drops the map, the second view, or the certainty labels. |
+
+Case: `17-no-file-surface`.
+
 ## Writing
 
 | Label | The run |
