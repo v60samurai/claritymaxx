@@ -10,6 +10,21 @@ Claritymaxx is a Claude Code plugin with skills for understanding hard material:
 
 It has one skill today: `explain`.
 
+## Inspiration
+
+Claritymaxx started from [a post by Andrej Karpathy](https://x.com/karpathy/status/2105819303471976479) about understanding the outputs of language models. His observation: as models do more of the implementation work on their own, more human work moves up into oversight and understanding.
+
+He described a progression of output formats for that work:
+
+- **Clear writing.** Ask for prose in the style of ASD-STE100, a controlled language from aerospace maintenance. The full standard is strict, so he suggests a softer target, "80% of the way to ASD-STE100".
+- **Diagrams and images**, when structure is easier to see than to read.
+- **Interactive HTML pages**, when exploring helps.
+- **Bespoke explainer videos**, the format he is most optimistic about.
+
+The larger idea is that intelligence and code are getting cheap. A custom, disposable artifact made to answer one question was too expensive to build before. Now it is a reasonable thing to ask for.
+
+Both the ladder of output formats and the ASD-STE100 writing style in this project come from that post. Claritymaxx is our implementation and extension of the idea: a reusable skill that builds the mental model first, then chooses the simplest medium that explains the topic well. Karpathy is not involved in this project and has not reviewed or endorsed it.
+
 ## What `explain` does
 
 `explain` builds a mental model of the subject before it writes a word of explanation. It reads the source, finds the few parts and relationships that carry most of the difficulty, and separates what the source shows from what it inferred. Then it presents that model in the cheapest medium that works.
@@ -62,7 +77,7 @@ Or call it by name: `/claritymaxx:explain <what you want to understand>`.
 text  →  diagram  →  interactive HTML  →  video (optional)
 ```
 
-The idea comes from a public note by Andrej Karpathy: as code and intelligence get cheap, a custom, disposable artifact can be the right answer to one question. Claritymaxx adds one rule. It climbs only as far as the model needs.
+This ladder is Karpathy's progression of output formats (see [Inspiration](#inspiration)). He presents each format as better than the one before for hard material. Claritymaxx adds one rule of its own: it climbs only as far as the mental model needs. The conditions in the table below are ours.
 
 | Medium | Chosen when |
 |--------|-------------|
@@ -75,7 +90,7 @@ The idea comes from a public note by Andrej Karpathy: as code and intelligence g
 
 ## Writing style
 
-The prose is inspired by [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/), a controlled language written for aerospace maintenance documents: familiar words, short sentences, one term for one thing, explicit cause and effect. Karpathy's phrase for the target is "80% of the way to ASD-STE100".
+The prose is inspired by [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/), a controlled language written for aerospace maintenance documents: familiar words, short sentences, one term for one thing, explicit cause and effect. Using it for explanations is Karpathy's suggestion, and so is the target: "80% of the way to ASD-STE100".
 
 That phrase names a style. It is not a score. Claritymaxx does not check text against the standard and does not claim that its output complies with ASD-STE100. Correct technical terms stay, and when precision and simplicity conflict, precision wins.
 
