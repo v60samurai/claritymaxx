@@ -94,6 +94,8 @@ The prose is inspired by [ASD-STE100 Simplified Technical English](https://www.a
 
 That phrase names a style. It is not a score. Claritymaxx does not check text against the standard and does not claim that its output complies with ASD-STE100. Correct technical terms stay, and when precision and simplicity conflict, precision wins.
 
+Before it sends anything, the skill edits once against a short list of rules: plain words, whole sentences, no em dashes, no filler openers or closers, and no claim that the source does not support. The same pass covers diagram labels, the text in HTML pages, and video narration.
+
 ## What is in the repository
 
 ```text

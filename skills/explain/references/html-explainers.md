@@ -23,7 +23,7 @@ Every interaction must teach something. If you remove a control and the reader l
 
 - One self-contained file: inline CSS and JavaScript, inline SVG for diagrams, no network requests, no build step. The file must open from disk.
 - Put the model in the first screen: one sentence and the overview diagram. A reader who stops there still leaves with the right idea.
-- Use the prose rules from `ste-style.md` for all text on the page.
+- All text on the page follows the writing rules and the edit pass in step 5 of `SKILL.md`. That includes headings, labels, button text, and captions.
 - Use motion only to show a change of state or the movement of information.
 - Make it readable at phone width and in light and dark themes. Make every control reachable from the keyboard.
 

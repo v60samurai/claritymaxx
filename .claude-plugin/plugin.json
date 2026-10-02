@@ -1,11 +1,20 @@
 {
   "name": "claritymaxx",
   "displayName": "Claritymaxx",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn difficult topics into clear mental models.",
-  "author": { "name": "Harshit Badiger", "url": "https://github.com/v60samurai" },
+  "author": {
+    "name": "Harshit Badiger",
+    "url": "https://github.com/v60samurai"
+  },
   "homepage": "https://github.com/v60samurai/claritymaxx",
   "repository": "https://github.com/v60samurai/claritymaxx",
   "license": "MIT",
-  "keywords": ["explain", "understanding", "mental-models", "diagrams", "skills"]
+  "keywords": [
+    "explain",
+    "understanding",
+    "mental-models",
+    "diagrams",
+    "skills"
+  ]
 }

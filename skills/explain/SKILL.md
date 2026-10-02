@@ -52,11 +52,23 @@ Match the length to the question. "Why does ice float?" gets a few sentences. A 
 - Lead with the model in one or two sentences, then build it up.
 - Put one idea in each sentence. Name the actor. State cause and effect with "because", "so", and "if".
 - Use the correct technical term, define it at first use, and keep that same term to the end.
-- Choose familiar, concrete words for everything else.
 - Say "inferred" or "unknown" in the sentence that carries such a claim, and say what would settle it.
 - Mark each invented example as illustrative.
 
 For more than a few paragraphs of prose, or when the user asks for ASD-STE100 or stricter controlled language, read `references/ste-style.md`.
+
+### Edit once before you send
+
+The text must read as if a careful person wrote it after they understood the subject. Apply this pass to every word the user reads: the reply, diagram labels and captions, the text in an HTML page, and video narration.
+
+- **Fidelity.** Every sentence states something the source or your model supports. Add no opinion, cause, emphasis, or confidence to make the text sound stronger.
+- **Plain words.** Write "use", "help", "many", "is", and "has". Replace "leverage", "utilize", "facilitate", "robust", "seamless", "crucial", "pivotal", "delve", "unlock", "landscape", "serves as", and "features" with the plain word. Technical terms stay.
+- **Mechanism over mood.** Name what the thing does, or give the number. Replace an adverb with the measurement or a stronger verb.
+- **Whole sentences.** Keep articles and verbs. In prose, write "then" or "so" in place of an arrow. Arrows belong in diagrams.
+- **Punctuation.** End the sentence or use a comma where a dash would go. Use no em dash and no en dash, including in ranges and compound terms: write "2014 to 2017" and "encoder-decoder". Use a colon only before a list or an example. Use straight quotes.
+- **Structure.** Prefer paragraphs. Use a list, a table, or a heading only when it helps the reader compare, follow steps, or scan. Write headings in sentence case. Bold a term where you define it and nowhere else. Use no decorative emoji.
+- **Natural counts.** Give as many items as there are. Do not round a list up or down to three. State a point directly, without "not just X but Y".
+- **No wrapper.** Start with the answer and stop when the point is clear. Leave out praise for the question, a closing summary, and an offer of more help.
 
 ## 6. Check the simplification
 

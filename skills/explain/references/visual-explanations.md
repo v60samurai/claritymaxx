@@ -27,6 +27,7 @@ If the question has two jobs, draw the one that is harder to say in words and wr
 - Show the one path that matters when a system has many. Highlight it and fade the rest.
 - Put two or three sentences after the diagram that tell the reader what to notice.
 - One strong diagram is better than several weak ones.
+- Labels, titles, and captions follow the edit pass in step 5 of `SKILL.md`. Arrows are fine inside the diagram.
 
 ## Render for the surface
 
